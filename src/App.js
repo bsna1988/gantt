@@ -28,11 +28,11 @@ function Hours({ startWork, finishWork }) {
 function Task({ id, estimatedHours, startHour, finishHour }) {
     const style = {
         width: (33 * (finishHour - startHour)) + "px",
-        left: (33 * startHour) + "px"
+        left: (33 * startHour - 12) + "px",
     }
     return (
         <div className="task" style={style}>
-            Task #{id} / {estimatedHours}h
+            <span className="task-id">#{id}</span> ({estimatedHours}h)
         </div>
     )
 }
@@ -47,13 +47,13 @@ export default function Timeline() {
             <div className="board-row" key="timelabels">
                 {timelabels}
             </div>
-            <div className="assignment board-row" key="employee-1">
+            <div className="board-row" key="employee-1">
                 <Hours startWork={9} finishWork={18} />
-                <Task id={0} estimatedHours={8} startHour={9} finishHour={33}/>
+                <Task id={0} estimatedHours={8} startHour={9} finishHour={12}/>
             </div>
             <div className="board-row" key="employee-2">
                 <Hours startWork={16} finishWork={25} />
-                <Task id={1} estimatedHours={7} startHour={16} finishHour={24} />
+                <Task id={1} estimatedHours={7} startHour={16} finishHour={17} />
             </div>
         </div>
     );
