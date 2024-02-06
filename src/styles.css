@@ -69,10 +69,34 @@ body {
   padding: 0;
   text-align: center;
   width: 34px;
+  z-index: 100;
+  position: relative;
+  opacity: 0.33;
 }
 
 .hour-enabled {
   background: #e0f4d6;
+  z-index: 0;
+}
+
+.task {
+  background: #5ca1d5;
+  border: 1px solid #100dde;
+  float: left;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 20px;
+  height: 20px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+  z-index: 10;
+  position: relative;
+  top: -26px;
+  padding-left: 8px;
+  border-radius: 3px;
 }
 
 .timelabel {

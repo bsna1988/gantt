@@ -4,22 +4,19 @@ function Hour({ enabled }) {
 }
 
 function TimeLabel({ hour }) {
-    return (<div className="timelabel">{hour}h</div>);
+    return (<div className="timelabel" key={hour}>{hour}h</div>);
 }
 
 function Hours({ startWork, finishWork }) {
     const startLunch = startWork + 4;
     const finishLunch = startLunch + 1;
-    const hours = arrayRange(1, 72, 1)
+    const hours = arrayRange(1, 48, 1)
         .map(hour => {
             const dayHour = hour % 24;
-            return (
-                <>
-                    <Hour enabled={dayHour >= startWork && dayHour < startLunch
-                        || dayHour >= finishLunch && dayHour < finishWork
-                        || finishWork > 24 && (dayHour + 24) < finishWork} />
-                </>
-            )
+            let isWorkHour = dayHour >= startWork && dayHour < startLunch
+                || dayHour >= finishLunch && dayHour < finishWork
+                || finishWork > 24 && (dayHour + 24) < finishWork;
+            return <Hour enabled={isWorkHour} key={"hour-" + hour} />
         });
     return (
         <>
@@ -28,25 +25,35 @@ function Hours({ startWork, finishWork }) {
     )
 }
 
+function Task({ id, estimatedHours, startHour, finishHour }) {
+    const style = {
+        width: (33 * (finishHour - startHour)) + "px",
+        left: (33 * startHour) + "px"
+    }
+    return (
+        <div className="task" style={style}>
+            Task #{id} / {estimatedHours}h
+        </div>
+    )
+}
+
 export default function Timeline() {
-    const timelabels = arrayRange(1, 72, 1)
+    const timelabels = arrayRange(1, 48, 1)
         .map(hour => {
-            return (
-                <>
-                    <TimeLabel hour={hour} />
-                </>
-            )
+            return <TimeLabel hour={hour} key={hour} />
         });
     return (
         <div className="timeline">
-            <div className="board-row">
+            <div className="board-row" key="timelabels">
                 {timelabels}
             </div>
-            <div className="board-row">
+            <div className="assignment board-row" key="employee-1">
                 <Hours startWork={9} finishWork={18} />
+                <Task id={0} estimatedHours={8} startHour={9} finishHour={33}/>
             </div>
-            <div className="board-row">
+            <div className="board-row" key="employee-2">
                 <Hours startWork={16} finishWork={25} />
+                <Task id={1} estimatedHours={7} startHour={16} finishHour={24} />
             </div>
         </div>
     );
