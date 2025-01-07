@@ -1,3 +1,4 @@
+const TIMELINE_LENGTH = 72;
 function Hour({ enabled }) {
     const className = enabled ? "hour hour-enabled" : "hour";
     return (<div className={className}></div>);
@@ -10,7 +11,7 @@ function TimeLabel({ hour }) {
 function Hours({ startWork, finishWork }) {
     const startLunch = startWork + 4;
     const finishLunch = startLunch + 1;
-    const hours = arrayRange(1, 72, 1)
+    const hours = arrayRange(1, TIMELINE_LENGTH, 1)
         .map(hour => {
             const dayHour = hour % 24;
             let isWorkHour = dayHour >= startWork && dayHour < startLunch
@@ -66,36 +67,30 @@ class Assignment {
 }
 
 const e_0_1=`
-0,6,9,16
-1,3,16,34
-2,7,34,42
-3,6,57,64
-4,6,64,85
+1,4,8,12
+3,2,34,36
 `;
 const e_0_2=`
+2,10,8,34
 `;
 const e_1_1=`
-0,6,9,16
-1,3,16,34
-2,7,34,42
-3,6,57,64
-4,6,64,85
+1,4,8,12
+3,2,56,58
 `;
 const e_1_2=`
+2,10,16,42
 `;
 const e_2_1=`
-0,6,9,16
-4,6,57,64
+1,4,8,12
+2,10,13,39
+3,2,39,41
 `;
 const e_2_2=`
-1,3,16,19
-2,7,19,42
-3,6,42,49
 `;
 
 
 function Timeline({ e1, e2, s1, f1, s2, f2 }) {
-    const timelabels = arrayRange(1, 72, 1)
+    const timelabels = arrayRange(1, TIMELINE_LENGTH, 1)
         .map(hour => {
             return <TimeLabel hour={hour} key={hour} />
         });
@@ -119,9 +114,9 @@ function Timeline({ e1, e2, s1, f1, s2, f2 }) {
 export default function Simulation() {
     return (
         <>
-            <Timeline e1={e_0_1} e2={e_0_2} s1={9} f1={18} s2={9} f2={18} key="tl0" />
-            <Timeline e1={e_1_1} e2={e_1_2} s1={9} f1={18} s2={16} f2={25} key="tl1" />
-            <Timeline e1={e_2_1} e2={e_2_2} s1={9} f1={18} s2={16} f2={25} key="tl2" />
+            <Timeline e1={e_0_1} e2={e_0_2} s1={8} f1={17} s2={8} f2={17} key="tl0" />
+            <Timeline e1={e_1_1} e2={e_1_2} s1={8} f1={17} s2={16} f2={25} key="tl1" />
+            <Timeline e1={e_2_1} e2={e_2_2} s1={8} f1={17} s2={16} f2={25} key="tl2" />
         </>
     )
 }
